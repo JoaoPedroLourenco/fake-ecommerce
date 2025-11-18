@@ -88,7 +88,7 @@ const Pedidos = () => {
 
                 <div>
                   <p>Quantidade de produtos: {pedido.products.length}</p>
-                  {produtosDetails === null &&
+                  {
                   produtosDetails?.id !== pedido.id ? (
                     <button onClick={() => opendetails(pedido)}>
                       Ver produtos

@@ -9,6 +9,7 @@ import Produtos from "./Routes/Produtos.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Pedidos from "./Routes/Pedidos.jsx";
 import Clientes from "./Routes/Clientes.jsx";
+import ClientesDetails from "./Routes/ClientesDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/clientes",
         element: <Clientes />,
+      },
+      {
+        path: "/clientes/:id",
+        element: <ClientesDetails/>
       },
     ],
   },
