@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Pedidos from "./Routes/Pedidos.jsx";
 import Clientes from "./Routes/Clientes.jsx";
 import ClientesDetails from "./Routes/ClientesDetails.jsx";
+import ProdutoDetails from "./Routes/ProdutoDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: "/clientes/:id",
         element: <ClientesDetails/>
       },
+      {
+        path: "/produtos/:idProduto",
+        element: <ProdutoDetails/>
+      }
     ],
   },
 ]);

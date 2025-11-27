@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useFetchData } from "../hooks/useFetchData";
 
 const Pedidos = () => {
-  const [pedidos, setPedidos] = useState([]);
-  const [usuario, setUsuario] = useState([]);
-  const [produtos, setProdutos] = useState([]);
+  const {data: pedidos, loading, error} = useFetchData("https://fakestoreapi.com/carts")
+  const {data: usuario} = useFetchData("https://fakestoreapi.com/users")
+  const {data: produtos} = useFetchData("https://fakestoreapi.com/products")
 
-  useEffect(() => {
-    const getInfo = async () => {
-      const apiPedidos = await fetch("https://fakestoreapi.com/carts");
-      const dataPedidos = await apiPedidos.json();
-      setPedidos(dataPedidos);
-
-      const apiUsers = await fetch("https://fakestoreapi.com/users");
-      const dataUsers = await apiUsers.json();
-      setUsuario(dataUsers);
-
-      const apiProdutos = await fetch("https://fakestoreapi.com/products");
-      const dataProdutos = await apiProdutos.json();
-      setProdutos(dataProdutos);
-    };
-
-    getInfo();
-  }, []);
+  
 
   const findUsuario = (uid) => {
     const clienteComPedido = usuario.find((user) => user.id === uid);
@@ -74,7 +59,7 @@ const Pedidos = () => {
       <h1 className="my-5 mx-12 text-3xl font-bold">Pedidos</h1>
 
       <div className="w-full flex items-center justify-center flex-col gap-3">
-        {pedidos &&
+        {error ? <p>{error}</p> : loading ? <p>carregando... </p> : pedidos &&
           pedidos.map((pedido) => (
             <>
               <div

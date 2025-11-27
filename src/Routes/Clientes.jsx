@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useFetchData } from "../hooks/useFetchData";
 
 const Clientes = () => {
-  const [clientes, setClientes] = useState([]);
-
-  useEffect(() => {
-    const handleClientes = async () => {
-      const apiClientes = await fetch("https://fakestoreapi.com/users");
-      const data = await apiClientes.json();
-      setClientes(data);
-    };
-    handleClientes();
-  }, []);
+  const {data: clientes, loading, error} = useFetchData("https://fakestoreapi.com/users")
 
   const [clienteDetails, setClienteDetails] = useState(0);
 

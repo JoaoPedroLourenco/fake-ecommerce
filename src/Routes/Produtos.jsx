@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useFetchData } from "../hooks/useFetchData";
 
 const Produtos = () => {
-  const [loading, setLoading] = useState(false);
-  const [produtos, setProdutos] = useState([]);
-
-  useEffect(() => {
-    const getProdutos = async () => {
-      setLoading(true);
-
-      const api = await fetch("https://fakestoreapi.com/products");
-      const data = await api.json();
-      setProdutos(data);
-
-      setLoading(false);
-    };
-
-    getProdutos();
-  }, []);
+  const {data: produtos, loading, error} = useFetchData("https://fakestoreapi.com/products")
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-wrap gap-4 my-5">
@@ -31,6 +18,7 @@ const Produtos = () => {
             <p>{produto.category}</p>
             <p>{produto.title}</p>
             <p>${produto.price.toFixed(2)}</p>
+            <Link to={`/produtos/${produto.id}`}>Ver detalhes</Link>
           </div>
         ))
       )}
