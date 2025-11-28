@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 
 const Pedidos = () => {
-  const {data: pedidos, loading, error} = useFetchData("https://fakestoreapi.com/carts")
-  const {data: usuario} = useFetchData("https://fakestoreapi.com/users")
-  const {data: produtos} = useFetchData("https://fakestoreapi.com/products")
-
-  
+  const {
+    data: pedidos,
+    loading,
+    error,
+  } = useFetchData("https://fakestoreapi.com/carts");
+  const { data: usuario } = useFetchData("https://fakestoreapi.com/users");
+  const { data: produtos } = useFetchData("https://fakestoreapi.com/products");
 
   const findUsuario = (uid) => {
     const clienteComPedido = usuario.find((user) => user.id === uid);
@@ -59,7 +61,12 @@ const Pedidos = () => {
       <h1 className="my-5 mx-12 text-3xl font-bold">Pedidos</h1>
 
       <div className="w-full flex items-center justify-center flex-col gap-3">
-        {error ? <p>{error}</p> : loading ? <p>carregando... </p> : pedidos &&
+        {error ? (
+          <p>{error}</p>
+        ) : loading ? (
+          <p>carregando... </p>
+        ) : (
+          pedidos &&
           pedidos.map((pedido) => (
             <>
               <div
@@ -73,8 +80,7 @@ const Pedidos = () => {
 
                 <div>
                   <p>Quantidade de produtos: {pedido.products.length}</p>
-                  {
-                  produtosDetails?.id !== pedido.id ? (
+                  {produtosDetails?.id !== pedido.id ? (
                     <button onClick={() => opendetails(pedido)}>
                       Ver produtos
                     </button>
@@ -104,7 +110,8 @@ const Pedidos = () => {
                 </div>
               )}
             </>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

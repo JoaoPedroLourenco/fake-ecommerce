@@ -11,12 +11,17 @@ import Pedidos from "./Routes/Pedidos.jsx";
 import Clientes from "./Routes/Clientes.jsx";
 import ClientesDetails from "./Routes/ClientesDetails.jsx";
 import ProdutoDetails from "./Routes/ProdutoDetails.jsx";
+import Home from "./Routes/Home.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/produtos",
         element: <Produtos />,
@@ -31,12 +36,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/clientes/:id",
-        element: <ClientesDetails/>
+        element: <ClientesDetails />,
       },
       {
         path: "/produtos/:idProduto",
-        element: <ProdutoDetails/>
-      }
+        element: <ProdutoDetails />,
+      },
     ],
   },
 ]);
