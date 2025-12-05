@@ -9,11 +9,14 @@ const Produtos = () => {
     error,
   } = useFetchData("https://fakestoreapi.com/products");
 
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const addToCart = (produtoId) => {
-    setCart((prevCart) => [prevCart, { ...produtoId }]);
+    const newItem = {title: produtoId.title, price: produtoId.price}
+
+    setCart((prevCart) => [...prevCart, newItem]);
   };
+
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,12 +24,15 @@ const Produtos = () => {
     setIsOpen(!isOpen);
   };
 
+
   console.log(cart);
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-wrap gap-4 my-5">
-      <button onClick={openCart}>
-        <i className="fa-solid fa-shopping-cart"></i>
+      <button onClick={openCart} className="relative">
+
+      <i className="fa-solid fa-shopping-cart" style={{fontSize: "28px"}}></i>
+      <span className="w-[25px] h-[25px] absolute -top-[50%] -right-[30%] flex items-center justify-center rounded-full bg-orange-500">{cart.length}</span>
       </button>
       {loading ? (
         <p>Carregando...</p>
@@ -48,10 +54,11 @@ const Produtos = () => {
       )}
 
       {isOpen && (
-        <div className="absolute w-[200px] h-full bg-gray-800 right-[0%]">
+        <div className="fixed top-0 w-[200px] h-full bg-gray-800 right-[0%]">
           {cart.length > 0 ? (cart.map((item) => (
               <div>
                 <p>{item.title}</p>
+                <p>R${(item.price).toFixed(2)}</p>
               </div>
             ))) : ""}
             
