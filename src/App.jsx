@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="flex">
       <NavBar />
-      <main className="w-full ml-[10%]">
+      <main className="w-full pl-[10%]  overflow-hidden">
         <Outlet />
       </main>
     </div>
